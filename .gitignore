@@ -8,6 +8,7 @@
 *.xls
 *.xlsm
 *.csv
+!docs/*.csv
 *.tsv
 *.parquet
 *.zip

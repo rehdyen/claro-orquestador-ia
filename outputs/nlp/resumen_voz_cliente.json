@@ -1,0 +1,144 @@
+{
+  "cluster_3_profile": {
+    "cluster_id": 3,
+    "calls_analyzed": 309,
+    "motive_distribution": [
+      {
+        "motive": "PRECIO_Y_COMPETENCIA",
+        "count": 116,
+        "pct": 37.54
+      },
+      {
+        "motive": "FALLA_TECNICA",
+        "count": 76,
+        "pct": 24.6
+      },
+      {
+        "motive": "MUDANZA_Y_TRASLADO",
+        "count": 59,
+        "pct": 19.09
+      },
+      {
+        "motive": "UNRESOLVED",
+        "count": 29,
+        "pct": 9.39
+      },
+      {
+        "motive": "FACTURACION_Y_COBROS",
+        "count": 27,
+        "pct": 8.74
+      },
+      {
+        "motive": "ATENCION_Y_CUMPLIMIENTO",
+        "count": 2,
+        "pct": 0.65
+      }
+    ],
+    "submotive_distribution": [
+      {
+        "submotive": "TARIFA_ELEVADA",
+        "count": 69,
+        "pct": 22.33
+      },
+      {
+        "submotive": "DEMORA_TRASLADO",
+        "count": 39,
+        "pct": 12.62
+      },
+      {
+        "submotive": "MEJOR_OFERTA_COMPETENCIA",
+        "count": 39,
+        "pct": 12.62
+      },
+      {
+        "submotive": "DEMORA_VISITA_TECNICA",
+        "count": 31,
+        "pct": 10.03
+      },
+      {
+        "submotive": "EVIDENCIA_INSUFICIENTE",
+        "count": 29,
+        "pct": 9.39
+      },
+      {
+        "submotive": "FALLA_DECO_TELEVISION",
+        "count": 28,
+        "pct": 9.06
+      },
+      {
+        "submotive": "TRASLADO_SIN_COBERTURA",
+        "count": 18,
+        "pct": 5.83
+      },
+      {
+        "submotive": "INCREMENTO_NO_INFORMADO",
+        "count": 16,
+        "pct": 5.18
+      },
+      {
+        "submotive": "INTERNET_LENTO_INTERMITENTE",
+        "count": 15,
+        "pct": 4.85
+      },
+      {
+        "submotive": "DISCREPANCIA_VALOR_PLAN",
+        "count": 11,
+        "pct": 3.56
+      },
+      {
+        "submotive": "FIN_DESCUENTO_PROMOCION",
+        "count": 8,
+        "pct": 2.59
+      },
+      {
+        "submotive": "CAMBIO_CIUDAD",
+        "count": 2,
+        "pct": 0.65
+      },
+      {
+        "submotive": "DEMORA_TRAMITE",
+        "count": 2,
+        "pct": 0.65
+      },
+      {
+        "submotive": "SIN_SERVICIO_TOTAL",
+        "count": 2,
+        "pct": 0.65
+      }
+    ],
+    "sentiment_distribution": {
+      "POSITIVE": 36,
+      "NEUTRAL": 15,
+      "NEGATIVE": 133,
+      "MIXED": 125
+    },
+    "urgency_distribution": {
+      "LOW": 156,
+      "MEDIUM": 58,
+      "HIGH": 0,
+      "CRITICAL": 95
+    },
+    "top_friction_evidence": [
+      "[Call 2] [NOMBRE] con billie [NOMBRE] wanna.",
+      "[Call 4] [NOMBRE]. [NOMBRE] mucho cuenta me dices te puedo",
+      "[Call 8] ¿[NOMBRE], muy buenos días hablas con [NOMBRE] [NOMBRE] [NOMBRE] dólares de cancelación le aclaro con quién tengo el gusto? ¿[NOMBRE] días habla",
+      "[Call 9] [NOMBRE] se encuentra el día de hoy, [NOMBRE] [NOMBRE] [NOMBRE].",
+      "[Call 47] [NOMBRE] sube, [NOMBRE] [NOMBRE] [NOMBRE]. [NOMBRE]. [NOMBRE], [NOMBRE] de hecho mira, la dirección los retrasos trasladar la básicamente. ¿[NOMBRE] único que bueno, es [DIRECCIÓN] torre uno [DIRECCIÓN] apartamento 13004? [NOMBRE], 3804 correcto. [NO"
+    ],
+    "taxonomy_version": "taxonomy_v1"
+  },
+  "summary_comparison": {
+    "total_calls": 500,
+    "cluster_3_calls": 309,
+    "top_motivo_cluster_3": {
+      "motive": "PRECIO_Y_COMPETENCIA",
+      "count": 116,
+      "pct": 37.54
+    },
+    "top_submotivo_cluster_3": {
+      "submotive": "TARIFA_ELEVADA",
+      "count": 69,
+      "pct": 22.33
+    }
+  }
+}
