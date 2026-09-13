@@ -26,6 +26,18 @@ Input/
 *.jsonl
 Ultimo correo recibido.txt
 
+# Documentos internos de preparación, borradores y carpetas locales de entrega
+Guia_de_Estudio_y_Preguntas_Entrevista.md
+dossier_plan_maestro_orquestador.md
+Plan Técnico y Funcional Definitivo*.md
+Roadmap_Analitico_Entregable_1.*
+Mini_Roadmap_Analitico_Cluster3_Claro_Colombia.*
+*.docx
+Entregable_1/
+entrega_final_claro/
+entrega_sol/
+material_estudio_sustentacion/
+
 # --- Credenciales y Secretos ---
 .env
 .env.*
