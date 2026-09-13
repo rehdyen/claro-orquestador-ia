@@ -1,0 +1,27 @@
+{
+  "prevalence": {
+    "development": 0.00519,
+    "holdout": 0.00525
+  },
+  "label_permutation_check": {
+    "pr_auc": 0.0036,
+    "lift_at_10": 0.476,
+    "roc_auc": 0.2863,
+    "expected_lift": 1.0,
+    "expected_roc_auc": 0.5,
+    "status": "FAIL"
+  },
+  "dominant_feature_challenger": {
+    "excluded_features": [
+      "VAL_RECLAMOS_MES",
+      "VELOCIDAD_INTERNET_MBPS",
+      "VAL_RENTA_ACTUAL"
+    ],
+    "features_used": 105,
+    "pr_auc": 0.4233,
+    "lift_at_10": 8.571,
+    "roc_auc": 0.9517,
+    "status": "PASS"
+  },
+  "verdict": "PASS"
+}

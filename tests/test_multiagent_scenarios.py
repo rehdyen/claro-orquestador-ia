@@ -233,3 +233,58 @@ def test_scenario_8_blocked_artificial_join(app, base_customer):
     res = app.invoke(init_state, config=config)
 
     assert "BLOCKED_ARTIFICIAL_1_TO_1_JOIN" in res["policy_flags"]
+
+
+def test_speed_upgrade_reachable(app, base_customer):
+    """Escenario 9: Falla por bajo ancho de banda (<= 50 Mbps) sin avería física -> SPEED_UPGRADE alcanzable."""
+    rec = base_customer.copy()
+    rec["VAL_RECLAMOS_MES"] = 0
+    rec["VELOCIDAD_INTERNET_MBPS"] = 30.0  # Plan bajo
+    rec["VAL_VAR_RENTA"] = 0.0
+    rec["BAN_CAZA_OFERTA"] = 0
+    rec["VAL_RENTA_ACTUAL"] = 65000.0
+
+    init_state = {
+        "run_id": "test_speed_upg",
+        "thread_id": "t9",
+        "request": {},
+        "customer_record": rec,
+        "cluster_id": 3,
+        "policy_flags": [],
+        "evidence_refs": [],
+        "retry_count": 0,
+        "human_decision": None
+    }
+
+    config = {"configurable": {"thread_id": "t9"}}
+    res = app.invoke(init_state, config=config)
+
+    action = res["recommended_action"]
+    assert action["action_id"] == "SPEED_UPGRADE"
+    assert action["action_type"] == "CONTRACTUAL"
+
+
+def test_discount_duration_policy_alignment(app, base_customer):
+    """Escenario 10: Descuento de 3 meses excede la política estándar de 2 meses y activa Senior Review."""
+    rec = base_customer.copy()
+    rec["VAL_VAR_RENTA"] = 25000.0
+
+    init_state = {
+        "run_id": "test_disc_dur",
+        "thread_id": "t10",
+        "request": {"force_action": "TEMP_RENT_DISCOUNT", "discount_pct": 0.15, "discount_months": 3},
+        "customer_record": rec,
+        "cluster_id": 3,
+        "policy_flags": [],
+        "evidence_refs": [],
+        "retry_count": 0,
+        "human_decision": None
+    }
+
+    config = {"configurable": {"thread_id": "t10"}}
+    res = app.invoke(init_state, config=config)
+
+    assert res["hitl_required"] is True
+    assert res["senior_review_required"] is True
+    assert any("excede política estándar" in r for r in res["hitl_reasons"])
+

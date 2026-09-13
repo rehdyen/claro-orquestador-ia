@@ -13,14 +13,14 @@
 [00:00 - 01:00] Slide 1: Apertura Ejecutiva y Declaración de Propósito
 [01:00 - 02:30] Slide 2: El Diagnóstico y el Hallazgo Oculto ("Silent Churn Gap")
 [02:30 - 04:00] Slide 3: La Voz del Cliente (NLP): Evidencia Estructurada de 500 Llamadas
-[04:00 - 05:30] Slide 4: Arquitectura Predictiva Dual: Separando Fuga de Intención
-[05:30 - 07:30] Slide 5: Rigor Metodológico, Cero Fuga T0 y Honestidad Estadística
-[07:30 - 09:00] Slide 6: Explicabilidad y Causalidad: Convergencia de SHAP y NLP
-[09:00 - 10:30] Slide 7: El Sistema Multi-Agente: Orquestación LangGraph con HITL
-[10:30 - 11:45] Slide 8: Gobernanza y Catálogo de Acciones: Coherencia Causal
-[11:45 - 13:15] Slide 9: Impacto Financiero y ROI: Escenarios de Uplift Incremental
-[13:15 - 14:15] Slide 10: Blueprint Tecnológico: Industrialización en Azure Databricks
-[14:15 - 15:00] Slide 11: Conclusión Ejecutiva y Hoja de Ruta de 90 Días
+[04:00 - 05:30] Slide 4: Estrategia Predictiva Dual: Separando Fuga de Intención
+[05:30 - 07:30] Slide 5: Rigor Estadístico: Cero Fuga T0 y Lift@10 = 9.05x
+[07:30 - 09:00] Slide 6: Explicabilidad: Convergencia de Evidencia (SHAP + Voz del Cliente)
+[09:00 - 10:30] Slide 7: Orquestación Multi-Agente: LangGraph con Gobernanza HITL
+[10:30 - 11:45] Slide 8: Gobernanza de Acciones: Coherencia Operativa (Falla Técnica != Descuento)
+[11:45 - 13:15] Slide 9: Valor Económico: ROI por Decil Empírico y Escenarios de Uplift
+[13:15 - 14:15] Slide 10: Productivización: Blueprint Conceptual en Azure Databricks
+[14:15 - 15:00] Slide 11: Cierre: Escuchar, Predecir, Explicar, Gobernar y Medir Valor
 ```
 
 ---
@@ -31,210 +31,148 @@
 **Acción visual**: Mostrar Slide 1 en pantalla completa. Tono seguro, profesional, ritmo pausado y entusiasta.
 
 > *"Muy buenos días, Rafael, y miembros del Comité de Analítica Avanzada de Claro Colombia.  
-> Mi nombre es Neydher Antonio Martin Ramos, y hoy vengo a presentarles no solo una propuesta analítica, sino un **sistema productivo de extremo a extremo** diseñado para resolver uno de los desafíos más costosos en el negocio masivo de Hogar: **la retención inteligente y gobernada de clientes mediante Inteligencia Artificial y Machine Learning**.*  
+> Mi nombre es Neydher Antonio Martin Ramos, y hoy vengo a presentarles una solución integral de retención diseñada para el **Cluster 3 de Hogar**, articulando tres pilares: **Machine Learning estadísticamente honesto**, **procesamiento estructurado de la Voz del Cliente** y un **sistema multi-agente gobernado bajo arquitectura Lakehouse**.*  
 >
-> *A lo largo de este proyecto, mi objetivo como Orquestador fue articular tres disciplinas clave: **Machine Learning estadísticamente honesto y libre de fugas temporales**, **procesamiento de lenguaje natural sobre la voz real del cliente** y **sistemas multi-agente gobernados bajo arquitectura Lakehouse en Databricks**. Entremos de inmediato en el diagnóstico del negocio."*
+> *Nuestra premisa de trabajo no fue automatizar descuentos indiscriminados, sino construir un sistema capaz de **escuchar, predecir, explicar, orquestar, gobernar y medir valor de negocio**. Entremos de inmediato al diagnóstico."*
 
 ---
 
 ### Minuto 01:00 – 02:30 | Diapositiva 2: El Diagnóstico y el Silent Churn Gap
-**Acción visual**: Pasar a Slide 2. Señalar la cifra 52 / 52.
+**Acción visual**: Pasar a Slide 2. Señalar el contraste 52 / 52.
 
-> *"Comencemos analizando el Cluster 3: un segmento de **20.000 clientes residenciales de alto valor**, con un ARPU promedio de casi 100.000 pesos colombianos y una facturación anual que supera los 23.000 millones de pesos.  
-> A primera vista, la tasa de deserción parece minúscula: apenas un **0.52% de churn efectivo**, equivalente a 104 clientes desconectados. Sin embargo, al contrastar esto con la intención de retiro registrada, encontramos que casi el **20% de la base manifiesta intención de cancelar**.*  
+> *"El Cluster 3 concentra 20.000 clientes residenciales con alta densidad de valor (ARPU promedio de $96.447 COP). Aunque la deserción global parece pequeña —un **0.52% de churn efectivo** (104 bajas)— casi el **20% de la base registra intención de retiro**.*  
 >
-> *Aquí surgió el primer y más determinante hallazgo analítico del proyecto: lo que denomino el **'Silent Churn Gap'**.  
-> Al cruzar ambas variables a nivel de cliente individual, descubrimos que **exactamente 52 de los 104 desertores reales NUNCA llamaron ni radicaron intención previa de cancelación**.  
-> ¿Qué significa esto para la operación de Claro? Que si mantenemos el enfoque clásico de esperar a que el cliente llame al Call Center de Retenciones para ofrecerle una contraoferta, **estamos dejando un punto ciego del 50% de las bajas reales**. Esos clientes sufren en silencio, no llaman a quejarse de su retiro, simplemente contratan a la competencia y solicitan la desconexión directa.  
-> Este hallazgo demostró empíricamente que **la intención de cancelación no es un proxy del churn real**, y que tratar de resolver ambos problemas con un solo modelo estaba condenado a la ineficiencia operativa."*
+> *Aquí surge el hallazgo central del caso: el **'Silent Churn Gap'**.  
+> Al cruzar ambas variables, encontramos que **exactamente 52 de los 104 desertores reales nunca llamaron ni radicaron intención previa de cancelación**.  
+> La implicación de negocio es inmediata: **una estrategia que solo atienda las llamadas de cancelación deja fuera al 50% del churn observado**. Son clientes que sufren degradación del servicio en silencio y migran sin previo aviso.  
+> Por esto, **la intención de retiro no puede sustituir al churn real**: se requieren dos modelos especializados para dos rutas de fuga complementarias."*
 
 ---
 
-### Minuto 02:30 – 04:00 | Diapositiva 3: La Voz del Cliente (NLP)
-**Acción visual**: Pasar a Slide 3. Apuntar a la gráfica de contraste de barras rojas y azules.
+### Minuto 02:30 – 04:00 | Diapositiva 3: La Voz del Cliente (VoC)
+**Acción visual**: Pasar a Slide 3. Mostrar el gráfico de barras comparativo de motivos.
 
-> *"Para entender la causa de este comportamiento, no podíamos quedarnos en tablas numéricas: fuimos directamente a la **voz del cliente**.  
-> Procesamos un lote representativo de **500 transcripciones de llamadas reales de servicio al cliente**, implementando un agente de NLP estructurado bajo contratos estrictos de Pydantic y una taxonomía cerrada de 6 motivos y 24 sub-motivos.*  
+> *"Para entender qué experimentan estos clientes, procesamos **500 transcripciones de llamadas reales** mediante un pipeline estructurado de NLP con taxonomía cerrada (6 macro-motivos y 24 sub-motivos) y contratos Pydantic (0 errores de esquema).*  
 >
-> *Como pueden observar en el gráfico de la derecha, el contraste es contundente:  
-> En el Cluster 3, **el 40.4% de todas las quejas corresponden a Fallas Técnicas de Internet, lentitud y microcortes de red**. Esto es **2.3 veces superior** a la frecuencia observada en los demás clusters de la compañía. Asimismo, los reclamos por demora en la asignación de visitas técnicas superan en un 35% el promedio.  
-> Los datos nos dieron un mensaje claro: **los clientes del Cluster 3 no se van porque Claro carezca de ofertas comerciales; se van porque el internet presenta intermitencia y el servicio de soporte en terreno no llega a tiempo**."*
+> *Aclaramos una decisión metodológica clave: **la voz del cliente no se cruza 1:1 con el dataset estructurado porque no existe llave de enlace**, sino que se integra rigurosamente a nivel de clúster y arquetipos colectivos.  
+> En el Cluster 3, los motivos dominantes son **Precio y Competencia (37.54%)** y **Falla Técnica (24.60%)**. Frente a otros clústeres, este grupo presenta **+4.18 puntos porcentuales en quejas técnicas**, **+7.44 pp en sentimiento negativo** y **+5.09 pp en urgencia crítica**. La insatisfacción técnica es un rasgo distintivo del segmento."*
 
 ---
 
-### Minuto 04:00 – 05:30 | Diapositiva 4: Arquitectura Predictiva Dual
-**Acción visual**: Pasar a Slide 4. Comparar las dos tarjetas: Modelo A vs Modelo B.
+### Minuto 04:00 – 05:30 | Diapositiva 4: Estrategia Predictiva Dual y Control T0
+**Acción visual**: Pasar a Slide 4. Comparar las dos tarjetas de modelado.
 
-> *"Con este diagnóstico, definimos una **Arquitectura Predictiva Dual**:  
-> En lugar de forzar una sola clasificación, entrenamos dos modelos de Machine Learning especializados en LightGBM:  
+> *"Diseñamos dos modelos especializados en LightGBM sobre **108 variables predictoras ex-ante**:  
+> - **El Modelo A** predice el **Churn Efectivo (BAN_CHURN)** sobre una prevalencia del 0.52%. Emplea árboles compactos regularizados (`max_depth=3`, `num_leaves=7`) y `scale_pos_weight` dinámico para capturar el riesgo sin sobreajustar ruido.  
+> - **El Modelo B** anticipa la **Intención de Cancelación (BAN_INTENCION_CANCELACION)** sobre una prevalencia del 19.91%, optimizado para priorizar la atención proactiva en canales de contacto.*  
 >
-> - **El Modelo A** ataca el **Churn Efectivo Real (BAN_CHURN)**. Como la prevalencia es de apenas el 0.52%, nos enfrentamos al clásico problema de 'buscar una aguja en un pajar'. Diseñamos árboles deliberadamente compactos, con máxima profundidad de 3 niveles y 7 hojas, aplicando regularización L1 y L2 estricta y ponderación dinámica de clases para asegurar que el modelo aprenda patrones estructurales y no memorice ruido aleatorio.  
-> - **El Modelo B**, por su parte, predice la **Intención de Cancelación (BAN_INTENCION_CANCELACION)** sobre una prevalencia del 19.91%, enfocado en anticipar llamadas de fricción para facultar al call center con capacidades de retención inmediata.*  
->
-> *Ambos modelos se complementan: el Modelo A previene la deserción silenciosa en campo, mientras que el Modelo B contiene la fuga activa en los canales de atención."*
+> *Ambos modelos fueron blindados contra fuga temporal ($T_0$): auditamos las 129 variables y excluimos las señales post-tratamiento, como `ESTADO_FUENTE_C` (que tenía correlación artificial de 1.000 por ser la marca de liquidación), `VAL_SALDO_ACTUAL` y las órdenes de desconexión `BAN_OT_CERRADAS_DX`."*
 
 ---
 
-### Minuto 05:30 – 07:30 | Diapositiva 5: Rigor Metodológico y Cero Fuga T0
+### Minuto 05:30 – 07:30 | Diapositiva 5: Rigor Estadístico y Lift@10 = 9.05x
 **Acción visual**: Pasar a Slide 5. Resaltar las curvas de Lift y los Intervalos de Confianza al 95%.
 
-> *"Llegamos a lo que considero el pilar más importante de mi trabajo: **la honestidad estadística y el rigor metodológico**.*  
->
-> *En proyectos de deserción, es común ver modelos con métricas sospechosamente perfectas infladas por **fuga de datos en T0**. Durante la auditoría inicial de las 129 variables de la base, identifiqué y aislé de inmediato variables contaminadas:  
-> Por ejemplo, `ESTADO_FUENTE_C`, que tenía correlación perfecta de 1.0 porque reflejaba la marca de cancelación en el sistema de facturación posterior al evento; `VAL_SALDO_ACTUAL`, que se liquidaba en cero cuando el contrato moría; y `BAN_OT_CERRADAS_DX`, que confirmamos en el diccionario oficial como la orden de desconexión ejecutada.  
-> Todas estas variables fueron clasificadas formalmente como fuga y **excluidas sin concesiones**. Entrenamos estrictamente sobre **108 variables predictoras genuinas previas al evento**.*  
->
-> *Y aun con este blindaje, miren los resultados en el conjunto de prueba independiente (Holdout ciego):  
-> El **Modelo A alcanza un Lift@10 de 9.05x**, con un intervalo de confianza al 95% obtenido por Bootstrap estratificado que va de **7.62x a 10.00x**.  
-> ¿Qué significa un Lift de 9.05x para Claro? Significa que **al ordenar a los clientes por nuestro score y contactar únicamente al 10% más riesgoso (el Decil 1), estamos capturando a más del 90% de todos los clientes que van a desertar**.  
-> El ROC-AUC se situó en 0.9569 y el PR-AUC en 0.4738, muy por encima de la línea base del 0.0052. Y en validación cruzada repetida de 20 folds, el modelo demostró total estabilidad sin sobreajuste."*
+> *"En problemas con desbalance severo, el accuracy no tiene sentido: evaluamos la capacidad de ranking.  
+> En el conjunto de prueba independiente (Holdout de 4.000 clientes), el **Modelo A alcanza un Lift@10 de 9.048x** con un intervalo de confianza al 95% obtenido por Bootstrap de **[7.62x a 10.00x]**.  
+> Esto significa que al contactar al 10% más riesgoso priorizado por el modelo (el Decil 1), **capturamos a más del 90% de todos los clientes que van a desertar**.  
+> El PR-AUC se situó en **0.4738** (frente a una línea base de 0.0052) y el ROC-AUC en **0.9569**. En validación cruzada repetida de 20 folds, el desempeño fue consistente (PR-AUC $0.4383 \pm 0.0732$), demostrando estabilidad sin fugas."*
 
 ---
 
-### Minuto 07:30 – 09:00 | Diapositiva 6: Explicabilidad y Causalidad (SHAP + NLP)
+### Minuto 07:30 – 09:00 | Diapositiva 6: Explicabilidad y Convergencia de Evidencia
 **Acción visual**: Pasar a Slide 6. Mostrar el gráfico SHAP Beeswarm.
 
-> *"Para que un modelo de Machine Learning sea operable, no puede ser una caja negra.  
-> Calculamos la explicabilidad global y local mediante **SHAP TreeExplainer**.  
-> Como ven en el gráfico Beeswarm, los cuatro principales factores de deserción son:  
-> 1. `VAL_RECLAMOS_MES`: cada queja adicional dispara fuertemente el riesgo.  
-> 2. `VELOCIDAD_INTERNET_MBPS`: clientes con anchos de banda inferiores a 50 Mbps sufren una probabilidad de deserción exponencialmente superior.  
-> 3. `VAL_VAR_RENTA`: variaciones positivas o cobros imprevistos en la factura.  
-> 4. `VAL_RENTA_ACTUAL`: clientes de mayor renta que sienten que no reciben el servicio por el que pagan.*  
->
-> *Observen la sincronía perfecta: **los hallazgos de SHAP en los datos estructurados convergen al 100% con los hallazgos del agente de NLP en las transcripciones de voz**.  
-> Esto valida la causalidad del problema: el cliente no deserta por capricho, deserta por fallas de calidad en la banda ancha."*
+> *"Para interpretar los modelos, utilizamos **SHAP TreeExplainer**.  
+> Es fundamental enfatizar nuestro rigor técnico: **SHAP explica el comportamiento asociativo del modelo, no demuestra causalidad**.  
+> Sin embargo, observamos una **convergencia temática contundente entre las señales estructuradas y la Voz del Cliente**:  
+> Los principales drivers del Modelo A son `VAL_RECLAMOS_MES`, `VELOCIDAD_INTERNET_MBPS`, `VAL_RENTA_ACTUAL` y `VAL_VAR_RENTA`.  
+> Esto converge directamente con lo reportado en las llamadas: clientes en planes de baja velocidad, con quejas acumuladas y shocks tarifarios. Aunque no se unen 1:1, ambas fuentes apuntan a las mismas dimensiones críticas de fricción."*
 
 ---
 
-### Minuto 09:00 – 10:30 | Diapositiva 7: El Sistema Multi-Agente (LangGraph + HITL)
-**Acción visual**: Pasar a Slide 7. Explicar los tres bloques de la arquitectura multi-agente.
+### Minuto 09:00 – 10:30 | Diapositiva 7: Orquestación Multi-Agente en LangGraph
+**Acción visual**: Pasar a Slide 7. Explicar el flujo de nodos y compuertas HITL.
 
-> *"Para pasar del modelo predictivo a la acción automatizada, implementamos un **Sistema Multi-Agente orquestado en LangGraph**:  
->
-> 1. Primero, en paralelo seguro, el **Customer Intelligence Agent** y el **VoC Agent** evalúan el estado del cliente. El agente de cliente calcula los scores de ambos modelos, asigna los deciles correspondientes y detecta de inmediato el flag de `SILENT_CHURN_PATTERN`.  
-> 2. Segundo, el **Retention Orchestrator** cruza la causa raíz con el catálogo oficial de intervenciones y proyecta el impacto económico.  
-> 3. Tercero, un **Judge Agent determinístico** audita la propuesta contra las políticas corporativas. Si el orquestador intenta sugerir una acción no permitida, el juez la bloquea y activa un ciclo de reintento controlado con memoria de estados.*  
->
-> *Y lo más relevante: **incorporamos Human-in-the-Loop nativo mediante la función `interrupt()` de LangGraph**. Si la acción toca dinero, si el cliente es VIP con ARPU superior a $110.000 COP, o si se requiere un descuento sensible, el grafo suspende su ejecución de manera asíncrona y traslada el expediente a la bandeja del supervisor humano en Claro, esperando su autorización antes de ejecutar cualquier cambio en el CRM."*
+> *"Para convertir estas predicciones en acciones gobernadas, implementamos un sistema multi-agente en **LangGraph**:  
+> 1. En ramas paralelas, el **Customer Intelligence Agent** y el **VoC Agent** consumen los activos analíticos precalculados (scores, deciles y resumen de voz).  
+> 2. El **Retention Orchestrator** consulta el catálogo oficial de acciones y evalúa el impacto financiero.  
+> 3. Un **Judge Agent determinístico** audita la propuesta contra las restricciones corporativas, con un ciclo de reintento acotado a 1 loop.  
+> 4. El sistema incorpora **Human-in-the-Loop nativo mediante la función `interrupt()`**: si la acción involucra impacto financiero, si el cliente es VIP ($ARPU \ge \$109.840$ COP), o si se detecta Silent Churn, el flujo se suspende y envía el caso a la bandeja del supervisor humano en Claro."*
 
 ---
 
-### Minuto 10:30 – 11:45 | Diapositiva 8: Gobernanza Causal y Catálogo de Acciones
-**Acción visual**: Pasar a Slide 8. Señalar la regla: 'Falla Técnica != Descuento Comercial'.
+### Minuto 10:30 – 11:45 | Diapositiva 8: Gobernanza de Acciones y Coherencia Operativa
+**Acción visual**: Pasar a Slide 8. Explicar el principio: "Falla técnica no es igual a rebaja comercial".
 
-> *"La regla de oro de nuestra gobernanza es la **Coherencia Causal**:  
-> Tradicionalmente, cuando un cliente llama enfadado porque se le cae el internet, la respuesta fácil del call center ha sido darle un descuento del 20% en la factura. Eso es un error financiero garrafal: Claro sacrifica margen y el cliente deserta 60 días después porque el cable coaxial sigue dañado.*  
->
-> *Nuestro sistema prohíbe taxativamente esa práctica:  
-> - Si la causa es técnica, la acción prescriptiva es **`PRIORITY_TECH_VISIT`**: una visita de cuadrilla técnica especializada para certificar acometida y módem en menos de 24 horas ($35.000 COP).  
-> - Si el problema es congestión por streaming, se prescribe un **`SPEED_UPGRADE`** lógico de velocidad ($15.000 COP).  
-> - El **`TEMP_RENT_DISCOUNT`** queda estrictamente reservado para clientes con shock tarifario o antigüedad probada, con un techo infranqueable del 20% y máximo por 2 meses.  
-> - Y para el Silent Churn, disparamos **`PREVENTIVE_DIAGNOSTIC`**: una llamada de fidelización VIP preventiva por un gestor senior ($8.000 COP).*  
->
-> *Todas estas acciones se exponen mediante **FastMCP**, asegurando tipado estricto, interoperabilidad y cero alucinaciones."*
+> *"Nuestra gobernanza establece una regla no negociable: **Falla técnica $\neq$ Rebaja comercial automática**.  
+> Si un cliente tiene fallas físicas de internet, darle un descuento temporal no resuelve el problema; el cliente sufrirá la misma intermitencia y desertará dos meses después con un menor margen para Claro.  
+> Por ello:  
+> - Ante averías de red o reclamos activos, prescribimos **`PRIORITY_TECH_VISIT`** ($35.000 COP) para certificar acometida y módem.  
+> - Si la lentitud es por plan bajo ($\le 50$ Mbps) sin avería, prescribimos **`SPEED_UPGRADE`** ($15.000 COP).  
+> - El descuento tarifario (**`TEMP_RENT_DISCOUNT`**) se limita a un **máximo estándar de 2 meses** para alivio tarifario; periodos de 3 meses exigen Senior Review.  
+> - Y para el Silent Churn, disparamos **`PREVENTIVE_DIAGNOSTIC`** ($8.000 COP) para auditar satisfacción antes de la baja."*
 
 ---
 
-### Minuto 11:45 – 13:15 | Diapositiva 9: Impacto Financiero y Escenarios de ROI
-**Acción visual**: Pasar a Slide 9. Resaltar la tabla de escenarios (10%, 20%, 30%).
+### Minuto 11:45 – 13:15 | Diapositiva 9: Valor Económico y Escenarios de ROI
+**Acción visual**: Pasar a Slide 9. Resaltar la tabla de triaje selectivo.
 
-> *"Hablemos de números de negocio y retorno de inversión.*  
+> *"En la evaluación financiera, adoptamos un principio de estricta honestidad: **no utilizamos las probabilidades brutas de LightGBM para calcular el ROI**, ya que el weighting distorsiona la calibración. Utilizamos la **tasa empírica observada en el Decil 1 (5.19%)**.*  
 >
-> *Siguiendo las mejores prácticas analíticas, **no utilizamos la probabilidad bruta de LightGBM para calcular el ROI**, ya que el parámetro `scale_pos_weight` desplaza la escala de probabilidades teóricas. En su lugar, utilizamos la **tasa empírica real observada en el Decil 1**, que es del **5.19%**.*  
+> *En los 2.000 clientes del Decil 1, hay 104 desertores esperados (~$120.1M COP en riesgo anual).  
+> Si se interviniera masivamente a los 2.000 clientes a $28.000 COP promedio ($56M COP de costo), la campaña sería deficitaria.  
+> Por eso, el orquestador aplica **Triaje Selectivo sobre el Top 500 de mayor riesgo**:  
+> Con un costo promedio de $12.500 COP (inversión de $6.25M COP):  
+> - En el **Escenario Base (20% de uplift)**: se salvan **13.5 clientes**, protegiendo **$15.62M COP** brutos anuales, logrando un **beneficio neto de +$9.37M COP**, un **Benefit/Cost Ratio de 2.50x** y un **Net ROI de +1.50x (+150%)**.  
+> - Incluso en el **Escenario Conservador (10% de uplift)**: se salvan **6.8 clientes**, protegiendo **$7.81M COP**, con beneficio neto positivo de **+$1.56M COP** y **Benefit/Cost de 1.25x**."*
+
+---
+
+### Minuto 13:15 – 14:15 | Diapositiva 10: Productivización en Azure Databricks
+**Acción visual**: Pasar a Slide 10. Recorrer los componentes del blueprint conceptual.
+
+> *"Para escalar esta solución, diseñamos un **Blueprint Conceptual de Productivización en Azure Databricks**:  
+> - **Delta Lake Medallion**: Ingesta con Auto Loader en Bronze, curaduría con Delta Live Tables y Feature Store libre de fugas T0 en Silver, y publicación de scores y bitácora HITL en Gold.  
+> - **MLflow Model Registry & Unity Catalog**: Firmas estrictas de modelos, linaje de datos de extremo a extremo y diseño compatible con principios de protección de datos personales de Colombia (Ley 1581), sujeto a validación legal.  
+> - **Databricks Workflows**: Un DAG batch de ejemplo (ej. 02:00 AM) para calificar a millones de clientes en Spark.  
+> - **Data Quality Monitoring / Data Profiling**: Alertas preventivas configurables de Data Drift (ej. PSI > 0.15) sobre drivers SHAP clave y seguimiento mensual de Concept Drift."*
+
+---
+
+### Minuto 14:15 – 15:00 | Diapositiva 11: Cierre Ejecutivo
+**Acción visual**: Pasar a Slide 11. Cierre convincente y seguro.
+
+> *"En conclusión:  
+> Entregamos una solución que **escucha la voz del cliente**, **predice con Lift de 9x sin fugas T0**, **explica el comportamiento del modelo**, **orquesta intervenciones con coherencia operativa**, **gobierna el riesgo financiero con supervisión humana**, y **mide el valor económico con rigor matemático**.  
 >
-> *En los 2.000 clientes que componen el Decil 1 del Cluster 3, hay una masa de facturación anual de **2.314 millones de pesos**, y se esperan **104 desertores naturales** que representan una fuga anual de **120.1 millones de pesos**.*  
->
-> *Modelamos 3 escenarios realistas de efectividad incremental (Uplift):  
-> - En un **Escenario Conservador (10% de retención)**, salvamos 10.4 clientes y protegemos **12 millones de pesos brutos** al año.  
-> - En un **Escenario Base (20% de retención)**, salvamos 20.8 clientes y protegemos **24.0 millones de pesos brutos** al año.  
-> - En un **Escenario Optimista (30% de retención)**, salvamos 31.1 clientes y protegemos **36.0 millones de pesos brutos** al año.*  
->
-> *Y si aplicamos la recomendación del orquestador de **focalizar con mayor precisión dentro del Decil 1** —priorizando visitas técnicas solo a quienes tienen reclamos y diagnóstico VIP a quienes no— el costo promedio de campaña baja a $12.500 COP, generando en el Escenario Base un **beneficio neto positivo y un ROI de +1.92x**, protegiendo el margen de la compañía desde el primer mes."*
+> Todo el paquete está respaldado por 23 pruebas unitarias automatizadas en verde y un repositorio público auditable.  
+> Muchas gracias, y quedo a su entera disposición para sus preguntas."*
 
 ---
 
-### Minuto 13:15 – 14:15 | Diapositiva 10: Blueprint Tecnológico en Azure Databricks
-**Acción visual**: Pasar a Slide 10. Recorrer los 4 pilares: Delta Lake, MLflow, Workflows y Monitoring.
+## Banco de Preguntas Difíciles & Respuestas Maestras (Q&A con Rafael Del Castillo)
 
-> *"¿Cómo llevamos esto a escala de millones de clientes en la infraestructura de Claro Colombia?  
-> A través de un **Enterprise Blueprint en Azure Databricks**:  
->
-> 1. **Delta Lake Medallion**: Ingesta continua vía Auto Loader en Bronze de facturación SAP, telemetría OSS de cablemódems y grabaciones de Call Center. Curaduría en Silver con Delta Live Tables y Feature Store libre de fugas T0. Publicación en Gold de scores y auditoría HITL.  
-> 2. **MLflow Model Registry en Unity Catalog**: Firmas estrictas de modelos, linaje de datos de extremo a extremo y enmascaramiento dinámico de PII en cumplimiento de la Ley de Habeas Data de Colombia.  
-> 3. **Databricks Workflows**: Un DAG diario que corre a las 02:00 AM para calificar por lotes a toda la base mediante inferencia distribuida en Spark con `mlflow.pyfunc`.  
-> 4. **Lakehouse Monitoring**: Detección continua de Data Drift con Population Stability Index (PSI > 0.15) sobre las variables SHAP críticas, y monitoreo mensual de Concept Drift en PR-AUC cuando las etiquetas de churn maduran a 30 y 60 días."*
+### 1. "¿Cómo confías en un Lift de 9x con sólo 104 churners?"
+> *"Por tres controles metodológicos independientes:  
+> 1. **Validación Cruzada Repetida**: Evaluamos 20 particiones estratificadas independientes (4 folds x 5 repeats), obteniendo un Lift@10 promedio de $8.31 \pm 0.80x$ y PR-AUC de $0.438 \pm 0.073$, confirmando estabilidad.  
+> 2. **Holdout Blindado e Intervalos Bootstrap**: En el 20% de holdout final, el Lift@10 puntual fue de 9.048x, y su intervalo al 95% por bootstrap se situó entre 7.62x y 10.00x.  
+> 3. **Auditoría Red Team de Leakage**: Ejecutamos una prueba de permutación de etiquetas donde el Lift colapsó a 0.48x y el PR-AUC a 0.0036, y un challenger sin las 3 variables principales que mantuvo un Lift de 8.57x. Esto demuestra que el desempeño es genuino y no producto de memorización ni de un proxy aislado."*
 
----
+### 2. "¿Por qué dos modelos y no uno solo?"
+> *"Porque 104 churners observados se dividen exactamente en **52 con intención previa y 52 sin intención (Silent Churn)**. Son dos fenómenos con dinámicas distintas: la intención es una señal reactiva de alta frecuencia (20% prevalencia) para atención temprana en canales; el churn efectivo es un evento terminal de desconexión (0.52%) que suele ocurrir en silencio por fatiga técnica. Un modelo único de churn diluiría la señal de intención, y un modelo único de intención ignoraría al 50% de las bajas reales."*
 
-### Minuto 14:15 – 15:00 | Diapositiva 11: Conclusión y Hoja de Ruta
-**Acción visual**: Pasar a Slide 11. Cierre firme, convincente y enérgico.
+### 3. "¿Para qué un sistema multi-agente si ya tenemos los modelos de Machine Learning?"
+> *"Los modelos predicen probabilidades; los agentes gobiernan cómo convertir esa evidencia en decisiones de negocio. Un modelo de ML no sabe si un cliente tiene un reclamo técnico pendiente, si el descuento solicitado supera el límite presupuestal o si la cuadrilla técnica debe despacharse en menos de 24 horas. El sistema multi-agente integra la evidencia estructurada con la no estructurada, aplica las políticas corporativas y activa el control humano cuando está en juego el margen de la compañía."*
 
-> *"En conclusión, Rafael y equipo:  
-> Este proyecto no es un experimento de código ni una simple libreta de Jupyter:  
-> - Es una **solución estadísticamente honesta**, que descartó fugas en T0 y alcanzó un Lift de 9.05x.  
-> - Es una **solución de negocio**, que descubrió el Silent Churn Gap y protege el 50% de las bajas que antes eran invisibles.  
-> - Es un **sistema gobernado**, que utiliza agentes de IA para lo que son excelentes —razonamiento contextual y extracción semántica— pero los restringe con jueces determinísticos y supervisión humana en donde está en juego el dinero corporativo.  
->
-> Con una hoja de ruta de **90 días**, podemos conectar el piloto en Databricks durante el Mes 1, desplegar la bandeja de supervisión HITL en el Mes 2 y ejecutar un test A/B con cuadrillas técnicas en el Mes 3.  
->
-> Cuentan con mi compromiso técnico, analítico y ético para liderar este frente en la Gerencia de Analítica Avanzada de Claro Colombia.  
-> Quedo a su entera disposición para sus preguntas. Muchas gracias."*
+### 4. "¿SHAP prueba causalidad entre las variables y la deserción?"
+> *"No. SHAP mide la contribución marginal de cada variable a la predicción del modelo basada en valores de Shapley de teoría de juegos; no es una prueba de inferencia causal. Lo que afirmamos técnicamente es una **convergencia temática de evidencia**: las variables con mayor peso en el modelo (`VAL_RECLAMOS_MES`, `VELOCIDAD`) concuerdan con los problemas que los clientes expresan en la voz cualitativa (fallas de internet y lentitud), permitiéndonos construir hipótesis operativas sólidas para guiar las acciones."*
 
----
+### 5. "¿Por qué no cruzaron las llamadas con los clientes a nivel 1:1?"
+> *"Porque en los insumos entregados no existe una llave de cuenta o cédula común. Cualquier intento de hacer un join sintético o artificial falsearía los datos e induciría sesgos graves en la evaluación. Preservamos la integridad analítica triangulando las fuentes a nivel de clúster y arquetipos de comportamiento, lo cual es la mejor práctica cuando no se cuenta con identificador unívoco."*
 
-## Banco de Preguntas Difíciles Anticipadas & Respuestas Maestras (Q&A con Rafael Del Castillo)
+### 6. "¿Por qué no utilizar las probabilidades crudas del modelo para proyectar el ROI?"
+> *"Porque al entrenar con `scale_pos_weight` para contrarrestar el desbalance severo (0.52%), las probabilidades predichas se desplazan hacia arriba y pierden calibración directa. Si multiplicáramos el ARPU por una probabilidad no calibrada de 0.60, inflaríamos ficticiamente los ahorros del proyecto. En su lugar, utilizamos la **tasa empírica observada en el Decil 1 (5.19%)**, lo que garantiza que las proyecciones financieras sean matemáticamente auditables y veraces."*
 
-### Pregunta 1: *"¿Por qué decidiste entrenar dos modelos separados en lugar de un solo modelo multi-clase o un solo score compuesto?"*
-**Respuesta Maestra**:
-> *"Excelente pregunta, Rafael. Inicialmente evalué la hipótesis de un modelo único, pero los datos la rechazaron contundentemente.  
-> Cuando cruzamos `BAN_CHURN` con `BAN_INTENCION_CANCELACION`, descubrimos que 52 de los 104 churners reales nunca llamaron a manifestar intención. Son **dos fenómenos con mecanismos generadores de datos totalmente distintos**:  
-> - La intención de retiro es un comportamiento reactivo, verbal, asociado a quejas y alta densidad (20% de prevalencia).  
-> - El churn real es un evento terminal de liquidación técnica (0.52% de prevalencia), que muchas veces ocurre en silencio por fatiga del usuario con el servicio.  
-> Si hubiéramos entrenado un solo modelo unificado, la alta prevalencia de la intención habría ahogado la señal débil pero crítica de los desertores silenciosos. Con dos modelos, tenemos la precisión de capturar a los dos segmentos con hiperparámetros y estrategias de muestreo calibradas para cada uno."*
-
----
-
-### Pregunta 2: *"Explicaste que eliminaste variables con fuga T0. ¿Cómo me garantizas que no queda ninguna fuga oculta en las 108 predictoras?"*
-**Respuesta Maestra**:
-> *"La garantía descansa en tres controles formales:  
-> 1. **Auditoría Léxica y de Diccionario**: Inspeccionamos cada variable en el diccionario oficial. Así descubrimos que `BAN_OT_CERRADAS_DX` correspondía a órdenes de desconexión ejecutadas, y fue purgada.  
-> 2. **Auditoría de Correlación Extrema**: Ninguna de las 108 variables tiene una correlación de Pearson superior a 0.35 con el target. En contraste, las variables descartadas como `ESTADO_FUENTE_C` tenían correlación de 1.000.  
-> 3. **Validación Cruzada vs Holdout Ciego**: El Modelo A obtuvo un PR-AUC de 0.4383 en la validación cruzada de 20 folds y 0.4738 en el Holdout final de 4.000 clientes. Cuando existe una fuga oculta en el dataset, el modelo suele dar métricas irreales de 0.99 en validación y desplomarse en holdout o presentar volatilidades extremas. Aquí los intervalos de confianza Bootstrap demuestran una generalización estadística consistente."*
-
----
-
-### Pregunta 3: *"¿Por qué no utilizaste la probabilidad de salida del modelo para calcular el ROI, y preferiste la tasa empírica por decil?"*
-**Respuesta Maestra**:
-> *"Porque en problemas con desbalance severo (0.52%), para que LightGBM logre rankear adecuadamente a los clientes en el Top 10%, utilizamos el hiperparámetro `scale_pos_weight`.  
-> Si bien la ponderación de clases preserva el ordenamiento (el ROC-AUC y el Lift no se alteran), **distorsiona la calibración de la probabilidad cruda**, haciendo que el modelo prediga valores de 0.40 u 0.80 sobre eventos que ocurren al 5%.  
-> Si multiplicáramos el ARPU por una probabilidad no calibrada de 0.80, estaríamos inflando artificialmente el caso de negocio y prometiendo ahorros ficticios al Comité Financiero.  
-> Al usar la **tasa empírica real observada en el Decil 1 (5.19%)**, el cálculo económico es 100% veraz, auditable y defendible ante cualquier auditor financiero de la compañía."*
-
----
-
-### Pregunta 4: *"Si un cliente del Decil 1 tiene reclamos de internet y pide la baja, ¿por qué el sistema prohíbe darle un descuento de inmediato?"*
-**Respuesta Maestra**:
-> *"Porque estamos atacando la causa y no el síntoma.  
-> Si a un cliente cuya fibra óptica tiene atenuación o cuyo módem está reiniciándose le otorgamos un 20% de descuento en la factura, logramos que cuelgue la llamada hoy, pero el problema técnico persiste. Tres semanas después, el cliente experimentará la misma caída de internet, sentirá frustración duplicada y se marchará definitivamente, habiéndole costado a Claro dos meses de facturación reducida.  
-> La prescripción causal del sistema es clara: primero se envía la cuadrilla con `PRIORITY_TECH_VISIT` para resolver la señal física. Una vez el servicio técnico está certificado, el gestor de experiencia puede aplicar un incentivo de fidelización comercial si persiste el riesgo."*
-
----
-
-### Pregunta 5: *"¿Cómo opera el sistema multi-agente en producción sin reventar la latencia ni los costos de inferencia?"*
-**Respuesta Maestra**:
-> *"Mediante una arquitectura híbrida desacoplada:  
-> 1. **La inferencia pesada de Machine Learning no corre en el LLM**: Se ejecuta de forma distribuida en Spark mediante MLflow en menos de 5 minutos para toda la base de clientes durante la madrugada.  
-> 2. **El agente no recalcula el modelo de cero**: Consume los scores, deciles y drivers SHAP precalculados en la tabla Delta Gold.  
-> 3. **Procesamiento de NLP Focalizado**: El agente de NLP no procesa las 20.000 llamadas; solo se invoca sobre las transcripciones de los clientes priorizados en los Deciles 1 y 2.  
-> 4. **Contratos FastMCP**: Toda la comunicación interna es serializada en JSON estructurado sin tokens conversacionales innecesarios. Esto mantiene la latencia p95 por cliente por debajo de 750 milisegundos y el costo computacional en una fracción marginal del valor salvado."*
-
----
-
-### Pregunta 6: *"¿Qué sucede si un caso requiere Human-in-the-Loop (`interrupt()`) pero el supervisor de retenciones no lo gestiona a tiempo?"*
-**Respuesta Maestra**:
-> *"El diseño del checkpointer en LangGraph contempla una política de **Time-to-Live (TTL) y Fallback Seguro**:  
-> Si un caso clasificado como HITL permanece más de 4 horas en la cola de supervisión sin interacción humana:  
-> 1. Se emite una alerta prioritaria de escalamiento al líder del turno.  
-> 2. Si la ventana de tiempo expira antes de la emisión de la factura, el sistema ejecuta una **acción de salvaguarda conservadora no invasiva** (por ejemplo, emitir un ticket automático de diagnóstico técnico preventivo sin alterar tarifas).  
-> 3. Bajo ninguna circunstancia el sistema otorgará descuentos financieros automáticamente por vencimiento de tiempo. La protección del margen de Claro es el principio rector del orquestador."*
+### 7. "¿Qué parte de la solución está productiva hoy?"
+> *"El blueprint de Azure Databricks es una propuesta conceptual de arquitectura de productivización. Lo que sí está plenamente implementado, probado y funcional hoy es el **núcleo analítico del assessment**: el pipeline de NLP con Pydantic, los modelos predictivos duales, el motor de explicabilidad SHAP, el grafo de agentes en LangGraph con compuertas HITL y el servidor FastMCP, todo validado localmente con 23 pruebas automatizadas pasando."*

@@ -50,9 +50,9 @@ ACTION_CATALOG: Dict[str, RetentionAction] = {
         action_type="COMMERCIAL",
         cost_cop=0.0,  # El costo es el descuento otorgado sobre el ARPU
         max_discount_pct=0.20,  # 20% umbral de gobierno
-        max_duration_months=3,
+        max_duration_months=2,  # Estándar autorizado máximo: 2 meses (superior requiere Senior Review)
         requires_hitl=True,  # Afecta precio -> siempre HITL
-        description="Descuento del 10% al 20% en la factura por un periodo de 2 a 3 meses condicionado a permanencia.",
+        description="Descuento del 10% al 20% en la factura por un periodo estándar de hasta 2 meses condicionado a permanencia.",
         eligibility_criteria="VAL_VAR_RENTA > 0 o sensibilidad alta a precio y antigüedad > 12 meses."
     ),
     "LOYALTY_BONUS": RetentionAction(
@@ -225,12 +225,14 @@ def project_cluster_portfolio_impact(
         net_profit = revenue_saved - total_campaign_cost
         roi = (net_profit / total_campaign_cost) if total_campaign_cost > 0 else 0.0
 
+        benefit_cost = (revenue_saved / total_campaign_cost) if total_campaign_cost > 0 else 0.0
         scenarios[sc_name] = {
             "uplift_label": f"{int(uplift * 100)}%",
             "retained_clients": round(retained_clients, 1),
             "gross_revenue_saved_cop": round(revenue_saved, 2),
             "campaign_cost_cop": round(total_campaign_cost, 2),
             "net_economic_benefit_cop": round(net_profit, 2),
+            "benefit_cost_ratio": round(benefit_cost, 2),
             "roi_ratio": round(roi, 2)
         }
 

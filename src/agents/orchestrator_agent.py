@@ -47,13 +47,13 @@ def retention_orchestrator_node(state: OrchestratorState) -> Dict[str, Any]:
         # Churn alto pero sin reclamos explícitos -> Diagnóstico preventivo
         selected_action_id = "PREVENTIVE_DIAGNOSTIC"
 
-    elif has_tech_fault and not has_price_pressure:
-        # Falla técnica pura -> Visita técnica prioritaria (NO descuento)
-        selected_action_id = "PRIORITY_TECH_VISIT"
-
-    elif has_tech_fault and customer.get("VELOCIDAD_INTERNET_MBPS", 100) <= 50 and not has_price_pressure:
-        # Falla técnica por ancho de banda -> Upgrade de velocidad
+    elif customer.get("VELOCIDAD_INTERNET_MBPS", 100) <= 50 and customer.get("VAL_RECLAMOS_MES", 0) == 0 and not has_price_pressure:
+        # Lentitud por bajo ancho de banda (plan <= 50 Mbps) sin avería física -> Upgrade de velocidad FTTH
         selected_action_id = "SPEED_UPGRADE"
+
+    elif has_tech_fault and not has_price_pressure:
+        # Falla técnica / avería física de red (reclamos activos) -> Visita técnica prioritaria
+        selected_action_id = "PRIORITY_TECH_VISIT"
 
     elif has_price_pressure:
         # Presión de precio -> Descuento temporal
@@ -134,6 +134,7 @@ def retention_orchestrator_node(state: OrchestratorState) -> Dict[str, Any]:
     # Regla 6: Duración extendida de descuento (> 2 meses)
     if discount_months > 2 and selected_action_id == "TEMP_RENT_DISCOUNT":
         hitl_reasons.append(f"Duración de descuento ({discount_months} meses) excede política estándar.")
+        senior_review = True
 
     # Regla 7: Acción fuera de catálogo
     if selected_action_id not in ACTION_CATALOG:

@@ -78,26 +78,34 @@ El **Cluster 3** representa el segmento de clientes residenciales más vulnerabl
 │   │   └── taxonomy_v1.json    # Taxonomía NLP oficial (6 macro-motivos, 24 sub-motivos)
 │   └── raw/                    # Datos crudos (.gitkeep)
 ├── docs/                       # Blueprints técnicos y gobernanza
-│   ├── databricks_blueprint.md # Blueprint empresarial Azure Databricks Lakehouse
+│   ├── databricks_blueprint.md # Blueprint conceptual Azure Databricks Lakehouse
 │   ├── data_leakage_t0_audit.md# Auditoría formal de control de fuga T0
 │   ├── feature_audit.csv       # Clasificación de 129 variables por rol
-│   └── matriz_accionables_roi.md # Matriz Impacto vs Esfuerzo y ROI empírico
+│   ├── matriz_accionables_roi.md # Matriz Impacto vs Esfuerzo y ROI empírico
+│   ├── model_a_leakage_redteam.md # Auditoría Red Team (Permutación & Challenger)
+│   └── FINAL_RELEASE_AUDIT.md  # Auditoría de cierre de release final
+├── entrega_final_claro/        # Paquete consolidado para adjuntar en correo de entrega
+│   ├── sustentacion_claro.pptx # Deck ejecutivo oficial (11 diapositivas 16:9)
+│   ├── guion_defensa_15min.md  # Guion oral de sustentación (15 min) + Banco Q&A
+│   ├── matriz_accionables_roi.md # Matriz de impacto y tabla de ROI por triaje
+│   ├── databricks_blueprint.md # Blueprint conceptual de productivización
+│   └── claro_orquestador_ia_codigo_fuente.zip # Respaldo limpio de código fuente
 ├── outputs/                    # Artefactos analíticos y modelos exportables
-│   ├── figures/                # Curvas Lift/PR, contrates NLP y Beeswarm SHAP
+│   ├── figures/                # Curvas Lift/PR, contrastes NLP y Beeswarm SHAP
 │   ├── models/                 # Modelos entrenados (.joblib) y métricas (.json)
 │   └── nlp/                    # Llamadas procesadas y resumen de voz del cliente
 ├── presentacion/               # Sustentación ejecutiva para Claro Colombia
 │   ├── guion_defensa_15min.md  # Guion oral palabra por palabra (15 min) + Banco Q&A
-│   └── sustentacion_claro.pptx # Deck ejecutivo de 11 diapositivas en 16:9 (python-pptx)
+│   └── sustentacion_claro.pptx # Deck ejecutivo canónico de 11 diapositivas en 16:9
 ├── src/                        # Código modular de producción
 │   ├── agents/                 # Agentes LangGraph (Customer, VoC, Orchestrator, Judge, Graph)
 │   ├── models/                 # Pipelines de entrenamiento dual, métricas y SHAP
-│   ├── pipelines/              # Procesamiento batch NLP y generador de presentación
+│   ├── pipelines/              # Procesamiento batch NLP y auditoría red team
 │   └── tools/                  # Catálogo de acciones, FastMCP y analítica de clientes
-├── tests/                      # Suite automatizada de pruebas (21/21 PASS)
+├── tests/                      # Suite automatizada de pruebas (23/23 PASS)
 │   ├── test_catalog_roi.py     # Tests de catálogo y cálculo económico empírico
 │   ├── test_models.py          # Tests de inferencia de modelos e integridad de métricas
-│   ├── test_multiagent_scenarios.py # 8 escenarios de gobernanza, HITL y restricciones
+│   ├── test_multiagent_scenarios.py # 10 escenarios de gobernanza, HITL y políticas
 │   └── test_nlp_agent.py       # Tests de taxonomía y contratos Pydantic
 ├── requirements.txt            # Dependencias reproducibles fijadas
 └── README.md                   # Documentación principal del proyecto
@@ -111,9 +119,9 @@ El **Cluster 3** representa el segmento de clientes residenciales más vulnerabl
 | :--- | :--- | :---: | :--- |
 | **G0** | **Data & Plan Ready** | **PASS** | Auditoría de 129 columnas, categorización estricta de roles, congelamiento de política T0. |
 | **G1** | **Voice & Data Ready** | **PASS** | 500 llamadas procesadas (0 fallos de esquema Pydantic), taxonomía 6x24, contraste Cluster 3. |
-| **G2** | **Predictive Ready** | **PASS** | Modelos Duales LightGBM. Modelo A: **Lift@10 = 9.05x** (IC 95%: [7.62 - 10.00x]), PR-AUC = 0.4738. Modelo B: Lift@10 = 3.81x, PR-AUC = 0.6278. 20-fold CV y SHAP TreeExplainer. |
-| **G3** | **Agentic Ready** | **PASS** | LangGraph StateGraph paralelo con reducers, detección de Silent Churn, Judge determinístico, **HITL nativo vía `interrupt()`** y servidor FastMCP. |
-| **G4** | **Business & Delivery Ready** | **PASS** | ROI basado en tasa empírica por decil (5.19%), 3 escenarios de retención incremental (10%, 20%, 30%), Blueprint Azure Databricks, Deck PPTX de 11 slides y guion de defensa de 15 min. |
+| **G2** | **Predictive Ready** | **PASS** | Modelos Duales LightGBM. Modelo A: **Lift@10 = 9.05x** (IC 95%: [7.62 - 10.00x]), PR-AUC = 0.4738. Modelo B: Lift@10 = 3.81x, PR-AUC = 0.6278. 20-fold CV y Red Team Audit PASS. |
+| **G3** | **Agentic Ready** | **PASS** | LangGraph StateGraph paralelo con reducers, detección de Silent Churn, Judge determinístico, **HITL nativo vía `interrupt()`** y adaptador FastMCP. |
+| **G4** | **Business & Delivery Ready** | **PASS** | ROI basado en tasa empírica por decil (5.19%), triaje selectivo Top 500 (+150% Net ROI), Blueprint Azure Databricks, Deck PPTX de 11 slides y guion de defensa de 15 min. |
 
 ---
 
@@ -121,7 +129,7 @@ El **Cluster 3** representa el segmento de clientes residenciales más vulnerabl
 
 ### Configuración del Entorno
 ```bash
-# Clonar repositorio
+# Clonar repositorio público
 git clone https://github.com/rehdyen/claro-orquestador-ia.git
 cd claro-orquestador-ia
 
@@ -134,14 +142,9 @@ source .venv/bin/activate  # En Linux/macOS
 pip install -r requirements.txt
 ```
 
-### Ejecución de Pruebas Unitarias (21 Tests en Verde)
+### Ejecución de Pruebas Unitarias (23 Tests en Verde)
 ```bash
 python -m pytest -v
-```
-
-### Generación Automatizada de la Presentación Ejecutiva
-```bash
-python src/pipelines/generate_presentation.py
 ```
 
 ---

@@ -20,6 +20,7 @@ Prueba_Técnica_-_Orquestador_Agentes_IA/
 Prueba_Técnica_-_Orquestador_Agentes_IA.zip
 data/raw/*
 !data/raw/.gitkeep
+Input/
 
 # Dumps de reuniones y correos confidenciales
 *.jsonl

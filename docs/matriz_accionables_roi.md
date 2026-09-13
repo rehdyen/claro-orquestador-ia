@@ -9,13 +9,13 @@
 ## 1. Resumen Ejecutivo y Tesis Financiera
 
 En telecomunicaciones fijas masivas (Hogar - Banda Ancha y TV), los programas tradicionales de retención incurren en dos graves ineficiencias financieras:
-1. **Retención Reactiva Tardia**: Intervenir únicamente cuando el cliente llama a cancelar (`BAN_INTENCION_CANCELACION = 1`), cuando el 50% de los desertores reales nunca emiten una llamada previa de cancelación (**Silent Churn Gap**: 52 de 104 churners desertaron sin alerta previa).
-2. **Canibalización de Margen por Descuentos Masivos**: Ofrecer rebajas tarifarias automáticas a clientes con fallas técnicas de red, lo que deteriora el ARPU sin resolver la causa raíz de la insatisfacción.
+1. **Retención Reactiva Tardía**: Intervenir únicamente cuando el cliente llama a cancelar (`BAN_INTENCION_CANCELACION = 1`), cuando el 50% de los desertores reales nunca emiten una llamada previa de cancelación (**Silent Churn Gap**: 52 de 104 churners desertaron sin alerta previa).
+2. **Canibalización de Margen por Descuentos Masivos**: Ofrecer rebajas tarifarias automáticas a clientes con fallas técnicas de red, lo que deteriora el ARPU sin resolver el problema de calidad de servicio.
 
 Este modelo propone una **Estrategia Dual de Precisión**:
 - **Focalización en Decil 1**: Con un **Lift@10 de 9.05x**, el Modelo A concentra el 90.5% - 100% de todos los eventos de churn en el 10% superior de la población.
 - **Calibración Empírica por Decil**: En lugar de inflar artificialmente las probabilidades teóricas debido a la corrección de desbalance (`scale_pos_weight`), el cálculo económico utiliza la **tasa empírica real de deserción del Decil 1 (5.19%)** observada en el conjunto de desarrollo.
-- **Evaluación por Escenarios de Uplift Incremental**: Se modelan 3 horizontes de efectividad de retención: **Conservador (10%)**, **Base (20%)** y **Optimista (30%)**.
+- **Evaluación por Escenarios de Uplift Incremental**: Se modelan 3 horizontes de efectividad incremental de retención: **Conservador (10%)**, **Base (20%)** y **Optimista (30%)**, etiquetados siempre como supuestos analíticos para evaluación de sensibilidad.
 
 ---
 
@@ -30,7 +30,7 @@ Este modelo propone una **Estrategia Dual de Precisión**:
 I      │  • Diagnóstico Silent Churn VIP
 M      │─────────────────────────────────────────────────────────────────
 P      │  [ACCIONES TÁCTICAS / DE RUTINA]       [ACCIONES A EVITAR / ABSTENCIÓN]
-A      │  • Bono Fidelización Premium           • Descuento en Renta sin Causa Técnica Resuelta
+A      │  • Bono Fidelización Premium           • Descuento en Renta sin Falla Técnica Resuelta
 C      │  • Encuesta CSAT automatizada          • Intervención en Deciles 7-10 (Canibalización)
 T      │                                        • Reclamos sin seguimiento de cuadrilla
 O      │
@@ -41,44 +41,33 @@ O      │
 
 ### Detalle de Cuadrantes
 
-| Cuadrante | Acción del Catálogo | Esfuerzo | Impacto | Justificación Causal y Operativa |
+| Cuadrante | Acción del Catálogo | Esfuerzo | Impacto | Justificación Operativa y Evidencia |
 | :--- | :--- | :---: | :---: | :--- |
-| **Quick Win** | `PRIORITY_TECH_VISIT` | Bajo / Medio | Muy Alto | Resuelve la queja #1 en NLP (40.4% fallas de internet) y el driver #1 en SHAP (`VAL_RECLAMOS_MES`). Costo fijo de $35.000 COP que salva un ARPU anual de ~$1.16M COP. |
-| **Quick Win** | `SPEED_UPGRADE` | Bajo (Lógico) | Alto | Aumento de velocidad de 100 a 200 Mbps vía aprovisionamiento en OSS. Costo marginal bajo ($15.000 COP) y alto impacto en percepción de calidad técnica. |
+| **Quick Win** | `PRIORITY_TECH_VISIT` | Bajo / Medio | Muy Alto | Responde a la queja técnica en NLP (24.6% fallas de internet) y al driver #1 en SHAP (`VAL_RECLAMOS_MES`). Costo fijo de $35.000 COP que busca proteger un ARPU anual de ~$1.16M COP. |
+| **Quick Win** | `SPEED_UPGRADE` | Bajo (Lógico) | Alto | Aumento de velocidad en clientes con planes $\le 50$ Mbps sin reclamos físicos. Aprovisionamiento lógico en OSS a costo marginal ($15.000 COP). |
 | **Quick Win** | `PREVENTIVE_DIAGNOSTIC` | Bajo | Alto | Llamada de fidelización VIP por gestor senior para clientes en Decil 1 sin intención registrada (Silent Churn). Costo de contacto: $8.000 COP. |
-| **Estratégica** | *Migración a Fibra FTTH* | Alto (CAPEX) | Muy Alto | Solución de infraestructura definitiva para mitigar el 8.2% de churners que citan lentitud crónica. |
-| **Táctica** | `TEMP_RENT_DISCOUNT` | Bajo | Medio | Alivio de 10% a 20% en factura condicionado a permanencia. **Requiere HITL estricto** para evitar degradación estructural del ARPU. |
-| **Táctica** | `LOYALTY_BONUS` | Bajo | Medio | Bonificación de paquete premium (ej. Win Sports+, Disney+) por 3 meses ($22.000 COP). Excelente para clientes caza-ofertas. |
+| **Estratégica** | *Migración a Fibra FTTH* | Alto (CAPEX) | Muy Alto | Solución de infraestructura definitiva para mitigar la lentitud crónica reportada en la voz del cliente. |
+| **Táctica** | `TEMP_RENT_DISCOUNT` | Bajo | Medio | Alivio de 10% a 20% en factura condicionado a permanencia. **Máximo estándar de 2 meses**; extensiones a 3 meses requieren **Senior Review obligatoria**. |
+| **Táctica** | `LOYALTY_BONUS` | Bajo | Medio | Bonificación de paquete premium (ej. Win Sports+, Disney+) por 3 meses ($22.000 COP) para clientes con patrones de caza-ofertas. |
 | **Abstención** | `ABSTAIN_NO_ACTION` | Cero | Protector | Clientes en deciles 7 a 10 o con evidencia insuficiente. Abstenerse protege el margen y evita saturar las cuadrillas de campo. |
 
 ---
 
 ## 3. Formulación Matemática del Modelo Económico
 
-El impacto financiero neto por cliente y a nivel de portafolio se gobierna mediante la siguiente formulación:
+El impacto financiero neto por cliente y a nivel de portafolio se gobierna mediante la siguiente formulación estándar:
 
-### 3.1. Ecuación Financiera Individual
+### 3.1. Ecuaciones Financieras
 
-$$\text{Valor Anual Salvado (COP)} = \text{ARPU} \times 12 \times P(\text{Churn} \mid \text{Decil}) \times \text{Uplift}$$
+$$\text{ExpectedAvoidedChurn} = N_{\text{target}} \times \text{empirical\_churn\_rate} \times \text{intervention\_uplift}$$
 
-Donde:
-- $\text{ARPU}$: Ingreso promedio mensual del cliente (Promedio Cluster 3: **$96.447 COP**; Percentil 75 VIP: **$109.840 COP**).
-- $P(\text{Churn} \mid \text{Decil})$: Tasa empírica de churn observada en el decil asignado. Para el Decil 1, **$P(\text{Churn} \mid D_1) = 0.0519$ (5.19%)**.
-- $\text{Uplift}$: Tasa de éxito incremental atribuible a la acción de retención según el escenario ($\text{Uplift} \in \{0.10, 0.20, 0.30\}$).
+$$\text{ProtectedRevenue} = \text{ExpectedAvoidedChurn} \times \text{ARPU\_monthly} \times \text{horizon\_months}$$
 
-### 3.2. Ecuación de Costo de Intervención
+$$\text{InterventionCost} = \text{fixed\_cost} + \text{variable\_action\_costs} + \text{discount\_costs}$$
 
-$$\text{Costo Total Intervención (COP)} = \text{Costo Fijo Operativo} + (\text{ARPU} \times \text{Descuento\%} \times \text{Meses})$$
+$$\text{BenefitCostRatio (B/C)} = \frac{\text{ProtectedRevenue}}{\text{InterventionCost}}$$
 
-Donde:
-- $\text{Costo Fijo Operativo}$: Costo logístico o de aprovisionamiento (ej. Visita Técnica: $35.000 COP; Bono Fidelización: $22.000 COP; Diagnóstico VIP: $8.000 COP).
-- $\text{Descuento\%} \times \text{Meses}$: Impacto comercial en la factura (máximo 20% por 2-3 meses según política HITL).
-
-### 3.3. Beneficio Neto y Retorno de Inversión (ROI)
-
-$$\text{Beneficio Neto (COP)} = \text{Valor Anual Salvado} - \text{Costo Total Intervención}$$
-
-$$\text{ROI Multiplicador} = \frac{\text{Beneficio Neto}}{\text{Costo Total Intervención}}$$
+$$\text{NetROI} = \frac{\text{ProtectedRevenue} - \text{InterventionCost}}{\text{InterventionCost}} = \text{BenefitCostRatio} - 1$$
 
 ---
 
@@ -89,42 +78,53 @@ $$\text{ROI Multiplicador} = \frac{\text{Beneficio Neto}}{\text{Costo Total Inte
 - **Público Objetivo Focalizado (Decil 1 de Riesgo)**: 2.000 clientes (10% superior).
 - **ARPU Mensual Promedio**: $96.447 COP (Ingreso anual por cliente: **$1.157.361 COP**).
 - **Masa de Ingreso Anual en Decil 1**: $2.314.722.720 COP (~$2.314 Millones COP).
-- **Desertores Naturales Esperados en Decil 1** ($5.19\%$): **103.8 clientes** (~104 clientes).
-- **Pérdida Anual en Facturación sin Intervención**: **$120.134.107 COP**.
-- **Costo Promedio de Intervención Ponderada**: $28.000 COP por cliente contactado.
-- **Inversión Total de Campaña Focalizada** (2.000 clientes $\times$ $28.000 COP): **$56.000.000 COP**.
+- **Tasa Empírica de Churn en Decil 1**: **5.19%** (83 churners en 1.600 casos dev).
+- **Desertores Naturales Esperados en Decil 1**: **103.8 clientes** (~104 clientes).
+- **Pérdida Anual en Facturación sin Intervención**: **$120.134.109 COP**.
 
 ---
 
-## 5. Análisis de Sensibilidad por Escenarios de Uplift
+## 5. Comparativa de Estrategias: Campaña Masiva vs. Triaje Selectivo
 
-| Métrica Financiera | Escenario Conservador (10% Uplift) | Escenario Base (20% Uplift) | Escenario Optimista (30% Uplift) |
-| :--- | :---: | :---: | :---: |
-| **Efectividad Incremental de Retención** | **10.0%** | **20.0%** | **30.0%** |
-| **Clientes Retenidos Directamente** | **10.4 clientes** | **20.8 clientes** | **31.1 clientes** |
-| **Ingreso Anual Bruto Protegido (COP)** | **$12.013.411 COP** | **$24.026.821 COP** | **$36.040.232 COP** |
-| **Costo Total de Campaña Focalizada (COP)** | $56.000.000 COP | $56.000.000 COP | $56.000.000 COP |
-| **Focalización Ultra-Selectiva (Top 500 Clientes D1)** | | | |
-| *Costo Campaña Top 500 ($28.000 COP/cli)* | $14.000.000 COP | $14.000.000 COP | $14.000.000 COP |
-| *Ingreso Salvado en Top 500 (65% del Churn)* | $7.808.717 COP | **$15.617.434 COP** | **$23.426.151 COP** |
-| *Beneficio Neto Anual en Top 500* | -$6.191.283 COP | **+$1.617.434 COP** | **+$9.426.151 COP** |
-| *ROI Multiplicador en Top 500* | -0.44x | **+1.12x** | **+1.67x** |
+### Estrategia A: Intervención Masiva a todo el Decil 1 (2.000 Clientes a $28.000 COP promedio)
+*Inversión Total de Campaña: $56.000.000 COP.*
+
+| Escenario | Uplift | Evitados | Protected Revenue | Campaign Cost | Benefit/Cost | Net ROI (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Conservador** | 10.0% | 10.4 | $12.013.411 COP | $56.000.000 COP | 0.21x | -78.5% |
+| **Base** | 20.0% | 20.8 | $24.026.822 COP | $56.000.000 COP | 0.43x | -57.1% |
+| **Optimista** | 30.0% | 31.1 | $36.040.233 COP | $56.000.000 COP | 0.64x | -35.6% |
+
+> [!WARNING]
+> **Lección Financiera Clave**: Intervenir indiscriminadamente a los 2.000 clientes de Decil 1 con un costo promedio de $28.000 COP destruye valor porque la tasa natural de churn es del 5.19%.  
+> El valor del sistema multi-agente no reside en enviar cuadrillas masivas, sino en **aplicar triaje de alta eficiencia**.
+
+---
+
+### Estrategia B: Triaje Selectivo Top 500 (Enfoque Oficial de Negocio)
+*Se prioriza a los 500 clientes con mayor severidad en el Decil 1 (concentran ~65% de los churners = 67.5 casos).*  
+*El orquestador asigna acciones según evidencia: Diagnóstico VIP ($8k) para Silent Churn, Visita ($35k) sólo ante reclamo activo, Upgrade ($15k) para baja velocidad.*  
+*Costo promedio de contacto ponderado: **$12.500 COP** $\rightarrow$ **Inversión Total: $6.250.000 COP**.*
+
+| Escenario | Uplift | Clientes Salvados | Protected Revenue | Campaign Cost | Beneficio Neto | Benefit/Cost | Net ROI |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Conservador** | 10.0% | 6.8 | $7.812.189 COP | $6.250.000 COP | +$1.562.189 COP | **1.25x** | **+25.0%** |
+| **Base** | 20.0% | 13.5 | $15.624.378 COP | $6.250.000 COP | **+$9.374.378 COP** | **2.50x** | **+1.50x (+150%)** |
+| **Optimista** | 30.0% | 20.2 | $23.436.568 COP | $6.250.000 COP | +$17.186.568 COP | **3.75x** | **+2.75x (+275%)** |
 
 > [!IMPORTANT]
-> **Estrategia de Ejecución Operativa Gradual**:
-> Si se interviene indiscriminadamente a los 2.000 clientes del Decil 1 con un costo medio de $28.000 COP, el umbral de rentabilidad requiere una efectividad del 46.6%.  
-> **Recomendación del Orquestador**: La política óptima consiste en **estratificar el Decil 1**:
-> 1. Contacto con **Visita Técnica Prioritaria** únicamente a clientes con reclamos técnicos o baja velocidad (cobertura causal directa).
-> 2. Contacto vía **Diagnóstico Preventivo VIP** ($8.000 COP) para el subgrupo de Silent Churn.
-> 3. Al reducir el costo promedio de contacto a **$12.500 COP** mediante triaje del agente, el Escenario Base genera un **ROI de +1.92x** y protege **+$24.0 Millones COP** de margen neto anual.
+> En el **Escenario Base**, el triaje selectivo genera:
+> - **Ingreso Bruto Protegido**: **$15.62M COP**
+> - **Inversión de Campaña**: **$6.25M COP**
+> - **Beneficio Económico Neto**: **+$9.37M COP**
+> - **Benefit-Cost Ratio**: **2.50x** (se recuperan $2.50 COP por cada peso invertido)
+> - **Net ROI**: **+1.50x (+150.0%)**
 
 ---
 
 ## 6. Políticas de Gobierno Financiero (HITL)
 
-Para blindar las finanzas de Claro Colombia, el sistema aplica reglas determinísticas no negociables:
-
-1. **Techo Máximo de Descuento (20%)**: Ningún agente de IA puede otorgar más del 20% de descuento. Todo descuento superior a este valor es interceptado y enviado a aprobación del Director de Fidelización (`senior_review_required = True`).
-2. **Duración Máxima de Alivio (2 meses)**: Los descuentos están limitados en el tiempo. Otorgar descuentos permanentes requiere reestructuración formal de plan por el área de Pricing.
-3. **Prohibición de Descuentos en Fallas Técnicas**: Si la causa raíz detectada por el NLP o SHAP es técnica (`VAL_RECLAMOS_MES >= 1` o fallas de red), el sistema bloquea los incentivos de precio y prescribe obligatoriamente `PRIORITY_TECH_VISIT`.
-4. **Clientes VIP (ARPU >= $109.840 COP)**: Toda acción sobre un cliente de alto valor en deciles de riesgo 1 o 2 activa una pausa obligatoria (`interrupt()`) para validación de un supervisor humano en la mesa de retención VIP.
+1. **Techo Máximo de Descuento (20%)**: Ningún agente de IA puede otorgar más del 20% de descuento. Todo descuento superior activa escalamiento inmediato (`senior_review_required = True`).
+2. **Duración Máxima Autorizada (2 meses)**: Los descuentos están limitados a 2 meses. Cualquier propuesta de 3 meses se escala obligatoriamente a Senior Review.
+3. **Falla Técnica $\neq$ Rebaja Comercial**: Si la evidencia dominante es técnica (`VAL_RECLAMOS_MES >= 1` o degradación de red), el sistema bloquea los descuentos tarifarios y prescribe `PRIORITY_TECH_VISIT` o `SPEED_UPGRADE`.
+4. **Clientes VIP (ARPU >= $109.840 COP)**: Toda acción sobre un cliente de alto valor en deciles de riesgo 1 o 2 activa una pausa obligatoria (`interrupt()`) para validación de un supervisor humano.
