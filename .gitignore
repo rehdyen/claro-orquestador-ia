@@ -1,0 +1,91 @@
+# ==============================================================================
+# Claro Colombia — Orquestador de Agentes de IA / Machine Learning
+# .gitignore — Estricto control de confidencialidad y gobernanza de datos
+# ==============================================================================
+
+# --- Confidencialidad y Protección de Datos (Habeas Data / Claro) ---
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+*.tsv
+*.parquet
+*.zip
+*.tar.gz
+*.7z
+
+# Exclusiones específicas de los insumos crudos de Claro
+Prueba_Técnica_-_Orquestador_Agentes_IA/
+Prueba_Técnica_-_Orquestador_Agentes_IA.zip
+data/raw/*
+!data/raw/.gitkeep
+
+# Dumps de reuniones y correos confidenciales
+*.jsonl
+Ultimo correo recibido.txt
+
+# --- Credenciales y Secretos ---
+.env
+.env.*
+*.pem
+*.key
+*.token
+credentials.json
+client_secret*.json
+
+# --- Entornos Virtuales y Dependencias ---
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Python & Compilación ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Jupyter Notebooks & Checkpoints ---
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# --- Testing & Cobertura ---
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# --- Logs & Temporales ---
+*.log
+scratch/
+tmp/
+temp/
+
+# --- Sistema Operativo & IDEs ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
