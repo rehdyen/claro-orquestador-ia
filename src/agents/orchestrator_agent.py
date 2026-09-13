@@ -97,9 +97,11 @@ def retention_orchestrator_node(state: OrchestratorState) -> Dict[str, Any]:
     econ = estimate_economic_impact(
         arpu_cop=arpu,
         churn_prob=churn_score,
+        churn_decile=churn_decile,
         action_id=selected_action_id,
         discount_pct=discount_pct,
-        discount_months=discount_months
+        discount_months=discount_months,
+        uplift_scenario="base"
     )
 
     # --------------------------------------------------------------------------

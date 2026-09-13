@@ -69,50 +69,59 @@ El **Cluster 3** representa el segmento de clientes residenciales más vulnerabl
 
 ---
 
-## 3. Estructura del Repositorio
+## 3. Estructura del Repositorio y Entregables
 
 ```text
 .
-├── data/                       # Insumos de datos (protegidos bajo .gitignore)
-│   ├── raw/                    # Datos crudos locales
-│   └── processed/              # Datasets procesados y limpios
-├── docs/                       # Blueprints técnicos y arquitectura de referencia
-│   ├── databricks_blueprint.md # Diseño Delta Lake, MLflow & Unity Catalog
-│   └── data_leakage_audit.md   # Auditoría de variables y T0
-├── notebooks/                  # Cuadernos interactivos reproducibles
-│   ├── 01_eda_datos.ipynb      # Auditoría exploratoria y distribuciones
-│   ├── 02_nlp_llamadas.ipynb   # Procesamiento LLM de las 500 llamadas
-│   ├── 03_modelos_ml.ipynb     # Entrenamiento Dual LightGBM, Lift y SHAP
-│   └── 04_orquestador_ia.ipynb # Pipeline E2E Multi-Agente con HITL
-├── outputs/                    # Artefactos generados exportables
-│   ├── figures/                # Gráficos de Lift, Curvas PR/ROC y SHAP
-│   ├── models/                 # Modelos entrenados (.joblib / MLflow)
-│   ├── nlp/                    # Clasificación estructurada de llamadas (JSON)
-│   └── reports/                # Informes ejecutivos y matrices de impacto
-├── presentacion/               # Sustentación ejecutiva para la Gerencia
-│   └── sustentacion_claro.pptx # Deck ejecutivo de 15 minutos
+├── data/                       # Insumos y datos procesados (protegidos bajo .gitignore)
+│   ├── processed/              # Taxonomía congelada, particiones y datos procesados
+│   │   └── taxonomy_v1.json    # Taxonomía NLP oficial (6 macro-motivos, 24 sub-motivos)
+│   └── raw/                    # Datos crudos (.gitkeep)
+├── docs/                       # Blueprints técnicos y gobernanza
+│   ├── databricks_blueprint.md # Blueprint empresarial Azure Databricks Lakehouse
+│   ├── data_leakage_t0_audit.md# Auditoría formal de control de fuga T0
+│   ├── feature_audit.csv       # Clasificación de 129 variables por rol
+│   └── matriz_accionables_roi.md # Matriz Impacto vs Esfuerzo y ROI empírico
+├── outputs/                    # Artefactos analíticos y modelos exportables
+│   ├── figures/                # Curvas Lift/PR, contrates NLP y Beeswarm SHAP
+│   ├── models/                 # Modelos entrenados (.joblib) y métricas (.json)
+│   └── nlp/                    # Llamadas procesadas y resumen de voz del cliente
+├── presentacion/               # Sustentación ejecutiva para Claro Colombia
+│   ├── guion_defensa_15min.md  # Guion oral palabra por palabra (15 min) + Banco Q&A
+│   └── sustentacion_claro.pptx # Deck ejecutivo de 11 diapositivas en 16:9 (python-pptx)
 ├── src/                        # Código modular de producción
-│   ├── agents/                 # Agentes LangGraph (VoC, Intelligence, Orchestrator)
-│   ├── models/                 # Pipelines de entrenamiento e inferencia ML
-│   ├── tools/                  # Herramientas Python y servidor FastMCP
-│   └── utils/                  # Ingesta, validación y métricas de negocio
-├── tests/                      # Suite de pruebas automatizadas (pytest)
-├── .gitignore                  # Políticas de exclusión y confidencialidad
+│   ├── agents/                 # Agentes LangGraph (Customer, VoC, Orchestrator, Judge, Graph)
+│   ├── models/                 # Pipelines de entrenamiento dual, métricas y SHAP
+│   ├── pipelines/              # Procesamiento batch NLP y generador de presentación
+│   └── tools/                  # Catálogo de acciones, FastMCP y analítica de clientes
+├── tests/                      # Suite automatizada de pruebas (21/21 PASS)
+│   ├── test_catalog_roi.py     # Tests de catálogo y cálculo económico empírico
+│   ├── test_models.py          # Tests de inferencia de modelos e integridad de métricas
+│   ├── test_multiagent_scenarios.py # 8 escenarios de gobernanza, HITL y restricciones
+│   └── test_nlp_agent.py       # Tests de taxonomía y contratos Pydantic
 ├── requirements.txt            # Dependencias reproducibles fijadas
 └── README.md                   # Documentación principal del proyecto
 ```
 
 ---
 
-## 4. Instalación y Reproducibilidad
+## 4. Estado de los Gates de Entrega (Definition of Done)
 
-### Prerrequisitos
-* Python 3.10 o superior.
-* Git y GitHub CLI (`gh`).
+| Gate | Nombre | Estado | Criterios Validados |
+| :--- | :--- | :---: | :--- |
+| **G0** | **Data & Plan Ready** | **PASS** | Auditoría de 129 columnas, categorización estricta de roles, congelamiento de política T0. |
+| **G1** | **Voice & Data Ready** | **PASS** | 500 llamadas procesadas (0 fallos de esquema Pydantic), taxonomía 6x24, contraste Cluster 3. |
+| **G2** | **Predictive Ready** | **PASS** | Modelos Duales LightGBM. Modelo A: **Lift@10 = 9.05x** (IC 95%: [7.62 - 10.00x]), PR-AUC = 0.4738. Modelo B: Lift@10 = 3.81x, PR-AUC = 0.6278. 20-fold CV y SHAP TreeExplainer. |
+| **G3** | **Agentic Ready** | **PASS** | LangGraph StateGraph paralelo con reducers, detección de Silent Churn, Judge determinístico, **HITL nativo vía `interrupt()`** y servidor FastMCP. |
+| **G4** | **Business & Delivery Ready** | **PASS** | ROI basado en tasa empírica por decil (5.19%), 3 escenarios de retención incremental (10%, 20%, 30%), Blueprint Azure Databricks, Deck PPTX de 11 slides y guion de defensa de 15 min. |
+
+---
+
+## 5. Instalación y Reproducibilidad
 
 ### Configuración del Entorno
 ```bash
-# Clonar el repositorio
+# Clonar repositorio
 git clone https://github.com/rehdyen/claro-orquestador-ia.git
 cd claro-orquestador-ia
 
@@ -121,19 +130,24 @@ python -m venv .venv
 source .venv/bin/activate  # En Linux/macOS
 # .venv\Scripts\activate   # En Windows PowerShell
 
-# Instalar dependencias
+# Instalar dependencias fijadas
 pip install -r requirements.txt
 ```
 
-### Ejecución de Pruebas Unitarias
+### Ejecución de Pruebas Unitarias (21 Tests en Verde)
 ```bash
-pytest tests/ -v
+python -m pytest -v
+```
+
+### Generación Automatizada de la Presentación Ejecutiva
+```bash
+python src/pipelines/generate_presentation.py
 ```
 
 ---
 
-## 5. Gobernanza y Confidencialidad
+## 6. Gobernanza y Confidencialidad
 
 Este repositorio implementa controles estrictos de seguridad de la información:
-* **Habeas Data & Secreto Comercial:** Ningún dato transaccional real de clientes de Claro Colombia es almacenado ni versionado en este repositorio.
-* Los insumos `.xlsx` y `.csv` se encuentran permanentemente ignorados en `.gitignore`.
+* **Habeas Data & Secreto Comercial (Ley 1581 Colombia):** Ningún dato transaccional real, número telefónico ni PII de clientes de Claro Colombia es almacenado ni versionado en este repositorio.
+* Los insumos `.xlsx`, `.parquet` y `.env` se encuentran permanentemente ignorados en `.gitignore`.
