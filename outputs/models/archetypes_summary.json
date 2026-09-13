@@ -1,0 +1,14 @@
+{
+  "arquetipo_1_alto_churn_alta_intencion": {
+    "index": 87,
+    "description": "Cliente en crisis abierta (fallas reiteradas + inconformidad de precio)",
+    "prob_churn": 0.001,
+    "prob_intent": 0.545
+  },
+  "arquetipo_2_silent_churn": {
+    "index": 25,
+    "description": "Cliente con fuga silenciosa (sin quejas expl\u00edcitas pero con deterioro t\u00e9cnico/comercial)",
+    "prob_churn": 0.002,
+    "prob_intent": 0.658
+  }
+}

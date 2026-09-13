@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "features_used": 108,
+    "feature_role_used": "PREDICTOR",
+    "leakage_t0_controlled": true,
+    "development_samples": 16000,
+    "holdout_samples": 4000
+  },
+  "model_a_churn": {
+    "cv_repeated_kfold_summary": {
+      "pr_auc": {
+        "mean": 0.4383,
+        "std": 0.0732
+      },
+      "lift_at_10": {
+        "mean": 8.3106,
+        "std": 0.7957
+      },
+      "lift_at_20": {
+        "mean": 4.7233,
+        "std": 0.2421
+      },
+      "roc_auc": {
+        "mean": 0.9504,
+        "std": 0.0228
+      }
+    },
+    "holdout_point_estimates": {
+      "pr_auc": 0.4738,
+      "lift_at_10": 9.048,
+      "lift_at_20": 4.762,
+      "roc_auc": 0.9569,
+      "brier_score": 0.0092
+    },
+    "holdout_bootstrap_ci95": {
+      "pr_auc": {
+        "mean": 0.4777,
+        "std": 0.1068,
+        "ci_lower": 0.2832,
+        "ci_upper": 0.6824
+      },
+      "lift_at_10": {
+        "mean": 9.0396,
+        "std": 0.6377,
+        "ci_lower": 7.619,
+        "ci_upper": 10.0
+      },
+      "lift_at_20": {
+        "mean": 4.7211,
+        "std": 0.2647,
+        "ci_lower": 4.048,
+        "ci_upper": 5.0
+      },
+      "roc_auc": {
+        "mean": 0.9564,
+        "std": 0.0222,
+        "ci_lower": 0.9072,
+        "ci_upper": 0.9903
+      }
+    }
+  },
+  "model_b_intencion": {
+    "cv_summary": {
+      "pr_auc": {
+        "mean": 0.6093,
+        "std": 0.0139
+      },
+      "lift_at_10": {
+        "mean": 3.639,
+        "std": 0.1566
+      },
+      "lift_at_20": {
+        "mean": 2.6516,
+        "std": 0.0528
+      },
+      "roc_auc": {
+        "mean": 0.8024,
+        "std": 0.0101
+      }
+    },
+    "holdout_point_estimates": {
+      "pr_auc": 0.6278,
+      "lift_at_10": 3.812,
+      "lift_at_20": 2.892,
+      "roc_auc": 0.8248,
+      "brier_score": 0.1501
+    },
+    "holdout_bootstrap_ci95": {
+      "pr_auc": {
+        "mean": 0.628,
+        "std": 0.0154,
+        "ci_lower": 0.5986,
+        "ci_upper": 0.6578
+      },
+      "lift_at_10": {
+        "mean": 3.8269,
+        "std": 0.1115,
+        "ci_lower": 3.603,
+        "ci_upper": 4.034
+      },
+      "lift_at_20": {
+        "mean": 2.8807,
+        "std": 0.0739,
+        "ci_lower": 2.735,
+        "ci_upper": 3.022
+      },
+      "roc_auc": {
+        "mean": 0.825,
+        "std": 0.0087,
+        "ci_lower": 0.8085,
+        "ci_upper": 0.842
+      }
+    }
+  }
+}

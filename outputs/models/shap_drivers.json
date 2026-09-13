@@ -1,0 +1,144 @@
+{
+  "model_a_top_drivers": [
+    {
+      "feature": "VAL_RECLAMOS_MES",
+      "mean_abs_shap": 1.18409
+    },
+    {
+      "feature": "VELOCIDAD_INTERNET_MBPS",
+      "mean_abs_shap": 1.02122
+    },
+    {
+      "feature": "VAL_RENTA_ACTUAL",
+      "mean_abs_shap": 0.79479
+    },
+    {
+      "feature": "VAL_SUM_VAL_MINUTOS_VOZ",
+      "mean_abs_shap": 0.54574
+    },
+    {
+      "feature": "VAL_RENTA_BSC_IVA",
+      "mean_abs_shap": 0.4956
+    },
+    {
+      "feature": "VAL_SCORE_CREDITICIO",
+      "mean_abs_shap": 0.41372
+    },
+    {
+      "feature": "VAL_DENSIDAD_ZONA",
+      "mean_abs_shap": 0.32371
+    },
+    {
+      "feature": "VAL_VAR_RENTA",
+      "mean_abs_shap": 0.31172
+    },
+    {
+      "feature": "VAL_RENTA_ADIC_IVA",
+      "mean_abs_shap": 0.30341
+    },
+    {
+      "feature": "VAL_EQUIP_BAS",
+      "mean_abs_shap": 0.26842
+    },
+    {
+      "feature": "ANTIGUEDAD_MESES",
+      "mean_abs_shap": 0.25149
+    },
+    {
+      "feature": "VAL_TICKETS_MES",
+      "mean_abs_shap": 0.24071
+    },
+    {
+      "feature": "VAL_FRECUENCIA_COMPRA",
+      "mean_abs_shap": 0.2382
+    },
+    {
+      "feature": "VAL_EQUIP_ADIC",
+      "mean_abs_shap": 0.22936
+    },
+    {
+      "feature": "VAL_LLAM_ADTIVAS_NEGATIVAS",
+      "mean_abs_shap": 0.1966
+    }
+  ],
+  "model_b_top_drivers": [
+    {
+      "feature": "VAL_LLAM_ADTIVAS_NEUTRAS",
+      "mean_abs_shap": 0.43572
+    },
+    {
+      "feature": "BAN_CAMPANA_VENTA",
+      "mean_abs_shap": 0.32788
+    },
+    {
+      "feature": "VAL_VAR_RENTA",
+      "mean_abs_shap": 0.29934
+    },
+    {
+      "feature": "VAL_SCORE_CREDITICIO",
+      "mean_abs_shap": 0.199
+    },
+    {
+      "feature": "BAN_CAZA_OFERTA",
+      "mean_abs_shap": 0.1424
+    },
+    {
+      "feature": "VAL_FRECUENCIA_COMPRA",
+      "mean_abs_shap": 0.13762
+    },
+    {
+      "feature": "VAL_DECO_BAS",
+      "mean_abs_shap": 0.12827
+    },
+    {
+      "feature": "VAL_LLAM_ADTIVAS_NEGATIVAS",
+      "mean_abs_shap": 0.12554
+    },
+    {
+      "feature": "VAL_RENTA_BSC_IVA",
+      "mean_abs_shap": 0.12368
+    },
+    {
+      "feature": "ANTIGUEDAD_MESES",
+      "mean_abs_shap": 0.11562
+    },
+    {
+      "feature": "VAL_RECLAMOS_MES",
+      "mean_abs_shap": 0.09888
+    },
+    {
+      "feature": "TIPO_TV_DIGITAL_P",
+      "mean_abs_shap": 0.09838
+    },
+    {
+      "feature": "VAL_RENTA_ACTUAL",
+      "mean_abs_shap": 0.0868
+    },
+    {
+      "feature": "VAL_RENTA_ADIC_IVA",
+      "mean_abs_shap": 0.08153
+    },
+    {
+      "feature": "VELOCIDAD_INTERNET_MBPS",
+      "mean_abs_shap": 0.07711
+    }
+  ],
+  "triangulation_nlp_ml": {
+    "precio_competencia": {
+      "nlp_prevalence_pct": 37.54,
+      "ml_shap_drivers": [
+        "VAL_RENTA_ACTUAL",
+        "VAL_RENTA_BSC_IVA",
+        "VAL_VAR_RENTA",
+        "VAL_RENTA_ADIC_IVA"
+      ]
+    },
+    "falla_tecnica": {
+      "nlp_prevalence_pct": 24.6,
+      "ml_shap_drivers": [
+        "VAL_RECLAMOS_MES",
+        "VELOCIDAD_INTERNET_MBPS"
+      ]
+    }
+  }
+}
